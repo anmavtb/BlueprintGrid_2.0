@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7617993406772165018, guid: 395a09268518754438cd757d54e16291, type: 3}
+      propertyPath: price
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -7617993406772165018, guid: 395a09268518754438cd757d54e16291, type: 3}
+      propertyPath: displayName
+      value: Big Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 972536194970970078, guid: 395a09268518754438cd757d54e16291, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

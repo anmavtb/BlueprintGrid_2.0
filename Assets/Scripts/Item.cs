@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] bool isSelected = false, canDeselect = true;
-    [SerializeField] float rotateValue = 90;
+    [SerializeField, ReadOnly] bool isSelected = false, canDeselect = true;
+    [SerializeField, ReadOnly] float rotateValue = 90;
+    [SerializeField] string displayName = "";
+    [SerializeField] float price = 0;
     Item collideItem = null;
 
     public bool CanDeselect => canDeselect;
+
+    public string DisplayName => displayName;
+    public float Price => price;
 
     public void SetPosition(Vector3 _pos)
     {
@@ -47,6 +52,7 @@ public class Item : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!DebugManager.Instance) return;
         AnmaGizmos.DrawSphere(transform.position, .2f, canDeselect ? Color.green : Color.red, AnmaGizmos.DrawMode.Wire, DebugManager.Instance.debugItemPlacement);
     }
 }

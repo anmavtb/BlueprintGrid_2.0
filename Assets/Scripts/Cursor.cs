@@ -10,8 +10,7 @@ public class Cursor : Singleton<Cursor>
     [SerializeField] LayerMask editableSurfaceLayer = 0, itemLayer = 0;
     [SerializeField] Camera gameCamera = null;
     [SerializeField, Range(1, 50)] float detectionDistance = 20;
-    [SerializeField]
-    Controls controls = null;
+    [SerializeField, ReadOnly] Controls controls = null;
     InputAction mousePositionInput = null;
     InputAction selectionInput = null;
     InputAction rotateInput = null;

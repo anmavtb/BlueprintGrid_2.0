@@ -1,15 +1,20 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ItemPlacementManager : Singleton<ItemPlacementManager>
 {
-    [SerializeField] Vector3 itemLocation = Vector3.zero;
-    [SerializeField] Item currentItem = null;
+    [SerializeField, ReadOnly] Vector3 itemLocation = Vector3.zero;
+    [SerializeField, ReadOnly] Item currentItem = null;
     [SerializeField] SnapGrid grid = null;
-    [SerializeField] bool wrongSelectionCheck = false;
-    [SerializeField] float selectorCooldown = 0;
+    [SerializeField, ReadOnly] bool wrongSelectionCheck = false;
+    [SerializeField, ReadOnly] float selectorCooldown = 0;
+    [SerializeField] List<Item> itemsPlaced = new();
 
     public bool IsValid => grid;
+
+    public List<Item> ItemsPlaced => itemsPlaced;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +63,8 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
     {
         if (!currentItem || !currentItem.CanDeselect || wrongSelectionCheck) return;
         currentItem.DeselectItem();
+        if (!itemsPlaced.Contains(currentItem))
+            itemsPlaced.Add(currentItem);
         currentItem = null;
     }
 
@@ -75,7 +82,28 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
     void RotateCurrentItem(InputAction.CallbackContext _context)
     {
         float _rotateValue = Cursor.Instance.RotateInput.ReadValue<float>();
+        RotateItem(_rotateValue);
+    }
+
+    public void RotateItem(float _rotateValue)
+    {
         if (!currentItem) return;
         currentItem.RotateItem(_rotateValue);
+    }
+
+    public void CancelPlacement()
+    {
+        if (itemsPlaced.Count <= 0) return;
+        Item lastItem = itemsPlaced.Last();
+        itemsPlaced.Remove(lastItem);
+        Destroy(lastItem.gameObject);
+    }
+
+    public void ClearAll()
+    {
+        if (itemsPlaced.Count <= 0) return;
+        foreach (Item item in itemsPlaced)
+            Destroy(item.gameObject);
+        itemsPlaced.Clear();
     }
 }
