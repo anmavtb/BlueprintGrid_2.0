@@ -1,17 +1,21 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
-    [SerializeField, ReadOnly] bool isSelected = false, canDeselect = true;
-    [SerializeField, ReadOnly] float rotateValue = 90;
-    [SerializeField] string displayName = "";
-    [SerializeField] float price = 0;
+    [SerializeField] protected string displayName = "";
+    [SerializeField] protected float price = 0;
+    [SerializeField] protected Sprite image = null;
+
+    [SerializeField, ReadOnly] protected bool isSelected = false, canDeselect = true;
+    [SerializeField, ReadOnly] protected float rotateValue = 90;
     Item collideItem = null;
 
     public bool CanDeselect => canDeselect;
 
     public string DisplayName => displayName;
     public float Price => price;
+    public Sprite Image => image;
 
     public void SetPosition(Vector3 _pos)
     {

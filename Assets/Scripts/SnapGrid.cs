@@ -24,10 +24,7 @@ public class SnapGrid : MonoBehaviour
             for (float j = -Extents.z; j <= Extents.z; j += spaceValue)
             {
                 Vector3 _gridpoint = new Vector3(i, Extents.y, j) + _surface.position;
-                if (i % 1 == 0 && j % 1 == 0)
-                    AnmaGizmos.DrawSphere(_gridpoint, .1f, Color.white, AnmaGizmos.DrawMode.Full);
-                else
-                    AnmaGizmos.DrawSphere(_gridpoint, .05f, Color.white, AnmaGizmos.DrawMode.Full);
+                AnmaGizmos.DrawSphere(_gridpoint, .05f, Color.white, AnmaGizmos.DrawMode.Full);
             }
         }
     }

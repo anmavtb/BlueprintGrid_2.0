@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -71,5 +72,13 @@ public class Cursor : Singleton<Cursor>
     {
         Vector2 _mousePos = mousePositionInput.ReadValue<Vector2>();
         return new Vector3(_mousePos.x, _mousePos.y, 0);
+    }
+
+    public bool IsMouseOverGrid()
+    {
+        Ray _ray = gameCamera.ScreenPointToRay(this.CursorLocation); // recup le rayon entre le curseur et la caméra
+        bool _hit = Physics.Raycast(_ray, out RaycastHit _hitRay, detectionDistance, editableSurfaceLayer); // fait le raycast pour detect le layer en param
+        if (!_hit) return false;
+        return true;
     }
 }

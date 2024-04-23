@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +11,7 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
     [SerializeField] SnapGrid grid = null;
     [SerializeField, ReadOnly] bool wrongSelectionCheck = false;
     [SerializeField, ReadOnly] float selectorCooldown = 0;
-    [SerializeField] List<Item> itemsPlaced = new();
+    [SerializeField, ReadOnly] List<Item> itemsPlaced = new();
 
     public bool IsValid => grid;
 
@@ -27,7 +28,6 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
     // Update is called once per frame
     void Update()
     {
-        if (UI.IsOver) return;
         UpdateItemPosition();
         if (Cursor.Instance.SelectionInput.triggered)
             DropItem();
@@ -36,7 +36,8 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
 
     public void CreateItem(Item _item)
     {
-        if (currentItem) return;
+        if (currentItem)
+            DestroyCurrentItem();
         SetItem(Instantiate(_item));
     }
 
@@ -61,7 +62,7 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
 
     void DropItem()
     {
-        if (!currentItem || !currentItem.CanDeselect || wrongSelectionCheck) return;
+        if (!currentItem || !currentItem.CanDeselect || wrongSelectionCheck || !Cursor.Instance.IsMouseOverGrid()) return;
         currentItem.DeselectItem();
         if (!itemsPlaced.Contains(currentItem))
             itemsPlaced.Add(currentItem);
@@ -101,9 +102,17 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
 
     public void ClearAll()
     {
+        if (currentItem)
+            DestroyCurrentItem();
         if (itemsPlaced.Count <= 0) return;
         foreach (Item item in itemsPlaced)
             Destroy(item.gameObject);
         itemsPlaced.Clear();
+    }
+
+    void DestroyCurrentItem()
+    {
+        Destroy(currentItem.gameObject);
+        currentItem = null;
     }
 }
