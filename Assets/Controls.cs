@@ -46,7 +46,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Rotate"",
+                    ""name"": ""RotateItem"",
                     ""type"": ""Button"",
                     ""id"": ""ac0d1762-b544-45f6-80dc-f2d5853ad6f9"",
                     ""expectedControlType"": ""Button"",
@@ -85,9 +85,59 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Rotate"",
+                    ""action"": ""RotateItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""GameCamera"",
+            ""id"": ""cc990641-eb96-43d4-b1f6-3c2f2ca30fe8"",
+            ""actions"": [
+                {
+                    ""name"": ""RotateCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""b139c464-d2e6-41fd-9382-07dd727ff275"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""72cafac0-601d-413d-9dc5-228d3dddaec4"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateCamera"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""925537e5-1f88-4c58-92b9-2cebd09f7ed4"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""198f7317-40e8-4258-b7b6-ab3136c77564"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -98,7 +148,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Cursor = asset.FindActionMap("Cursor", throwIfNotFound: true);
         m_Cursor_MousePosition = m_Cursor.FindAction("MousePosition", throwIfNotFound: true);
         m_Cursor_Select = m_Cursor.FindAction("Select", throwIfNotFound: true);
-        m_Cursor_Rotate = m_Cursor.FindAction("Rotate", throwIfNotFound: true);
+        m_Cursor_RotateItem = m_Cursor.FindAction("RotateItem", throwIfNotFound: true);
+        // GameCamera
+        m_GameCamera = asset.FindActionMap("GameCamera", throwIfNotFound: true);
+        m_GameCamera_RotateCamera = m_GameCamera.FindAction("RotateCamera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -162,14 +215,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<ICursorActions> m_CursorActionsCallbackInterfaces = new List<ICursorActions>();
     private readonly InputAction m_Cursor_MousePosition;
     private readonly InputAction m_Cursor_Select;
-    private readonly InputAction m_Cursor_Rotate;
+    private readonly InputAction m_Cursor_RotateItem;
     public struct CursorActions
     {
         private @Controls m_Wrapper;
         public CursorActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MousePosition => m_Wrapper.m_Cursor_MousePosition;
         public InputAction @Select => m_Wrapper.m_Cursor_Select;
-        public InputAction @Rotate => m_Wrapper.m_Cursor_Rotate;
+        public InputAction @RotateItem => m_Wrapper.m_Cursor_RotateItem;
         public InputActionMap Get() { return m_Wrapper.m_Cursor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -185,9 +238,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
-            @Rotate.started += instance.OnRotate;
-            @Rotate.performed += instance.OnRotate;
-            @Rotate.canceled += instance.OnRotate;
+            @RotateItem.started += instance.OnRotateItem;
+            @RotateItem.performed += instance.OnRotateItem;
+            @RotateItem.canceled += instance.OnRotateItem;
         }
 
         private void UnregisterCallbacks(ICursorActions instance)
@@ -198,9 +251,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
-            @Rotate.started -= instance.OnRotate;
-            @Rotate.performed -= instance.OnRotate;
-            @Rotate.canceled -= instance.OnRotate;
+            @RotateItem.started -= instance.OnRotateItem;
+            @RotateItem.performed -= instance.OnRotateItem;
+            @RotateItem.canceled -= instance.OnRotateItem;
         }
 
         public void RemoveCallbacks(ICursorActions instance)
@@ -218,10 +271,60 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public CursorActions @Cursor => new CursorActions(this);
+
+    // GameCamera
+    private readonly InputActionMap m_GameCamera;
+    private List<IGameCameraActions> m_GameCameraActionsCallbackInterfaces = new List<IGameCameraActions>();
+    private readonly InputAction m_GameCamera_RotateCamera;
+    public struct GameCameraActions
+    {
+        private @Controls m_Wrapper;
+        public GameCameraActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @RotateCamera => m_Wrapper.m_GameCamera_RotateCamera;
+        public InputActionMap Get() { return m_Wrapper.m_GameCamera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameCameraActions set) { return set.Get(); }
+        public void AddCallbacks(IGameCameraActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GameCameraActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameCameraActionsCallbackInterfaces.Add(instance);
+            @RotateCamera.started += instance.OnRotateCamera;
+            @RotateCamera.performed += instance.OnRotateCamera;
+            @RotateCamera.canceled += instance.OnRotateCamera;
+        }
+
+        private void UnregisterCallbacks(IGameCameraActions instance)
+        {
+            @RotateCamera.started -= instance.OnRotateCamera;
+            @RotateCamera.performed -= instance.OnRotateCamera;
+            @RotateCamera.canceled -= instance.OnRotateCamera;
+        }
+
+        public void RemoveCallbacks(IGameCameraActions instance)
+        {
+            if (m_Wrapper.m_GameCameraActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGameCameraActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GameCameraActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GameCameraActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GameCameraActions @GameCamera => new GameCameraActions(this);
     public interface ICursorActions
     {
         void OnMousePosition(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
-        void OnRotate(InputAction.CallbackContext context);
+        void OnRotateItem(InputAction.CallbackContext context);
+    }
+    public interface IGameCameraActions
+    {
+        void OnRotateCamera(InputAction.CallbackContext context);
     }
 }

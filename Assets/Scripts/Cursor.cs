@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,40 +10,16 @@ public class Cursor : Singleton<Cursor>
     [SerializeField] LayerMask editableSurfaceLayer = 0, itemLayer = 0;
     [SerializeField] Camera gameCamera = null;
     [SerializeField, Range(1, 50)] float detectionDistance = 20;
-    [SerializeField, ReadOnly] Controls controls = null;
-    InputAction mousePositionInput = null;
-    InputAction selectionInput = null;
-    InputAction rotateInput = null;
 
     public Vector3 CursorLocation => GetMousePosition();
-    public InputAction SelectionInput => selectionInput;
-    public InputAction RotateInput => rotateInput;
     public bool IsValid => gameCamera;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        controls = new Controls();
-    }
 
     // Update is called once per frame
     void Update()
     {
         Interact(editableSurfaceLayer, OnEditableSurface, detectionDistance);
-        if (selectionInput.triggered)
+        if (InputManager.Instance.SelectionInput.triggered)
             InteractWithComponent(itemLayer, OnSelection, detectionDistance);
-    }
-
-    private void OnEnable()
-    {
-        mousePositionInput = controls.Cursor.MousePosition;
-        mousePositionInput.Enable();
-
-        selectionInput = controls.Cursor.Select;
-        selectionInput.Enable();
-
-        rotateInput = controls.Cursor.Rotate;
-        rotateInput.Enable();
     }
 
     void Interact(LayerMask _validMask, Action<Vector3> _callback, float _distance = 20)
@@ -70,7 +45,7 @@ public class Cursor : Singleton<Cursor>
 
     Vector3 GetMousePosition()
     {
-        Vector2 _mousePos = mousePositionInput.ReadValue<Vector2>();
+        Vector2 _mousePos = InputManager.Instance.MousePositionInput.ReadValue<Vector2>();
         return new Vector3(_mousePos.x, _mousePos.y, 0);
     }
 

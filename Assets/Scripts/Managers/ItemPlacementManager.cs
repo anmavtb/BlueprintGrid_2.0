@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,14 +21,14 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
     {
         Cursor.Instance.OnEditableSurface += SetPosition;
         Cursor.Instance.OnSelection += SetItem;
-        Cursor.Instance.RotateInput.performed += RotateCurrentItem;
+        InputManager.Instance.RotateItemInput.performed += RotateCurrentItem;
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateItemPosition();
-        if (Cursor.Instance.SelectionInput.triggered)
+        if (InputManager.Instance.SelectionInput.triggered)
             DropItem();
         WrongSelectorCoolDown();
     }
@@ -82,7 +81,7 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
 
     void RotateCurrentItem(InputAction.CallbackContext _context)
     {
-        float _rotateValue = Cursor.Instance.RotateInput.ReadValue<float>();
+        float _rotateValue = InputManager.Instance.RotateItemInput.ReadValue<float>();
         RotateItem(_rotateValue);
     }
 

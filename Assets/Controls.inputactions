@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Rotate",
+                    "name": "RotateItem",
                     "type": "Button",
                     "id": "ac0d1762-b544-45f6-80dc-f2d5853ad6f9",
                     "expectedControlType": "Button",
@@ -63,9 +63,59 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rotate",
+                    "action": "RotateItem",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "GameCamera",
+            "id": "cc990641-eb96-43d4-b1f6-3c2f2ca30fe8",
+            "actions": [
+                {
+                    "name": "RotateCamera",
+                    "type": "Button",
+                    "id": "b139c464-d2e6-41fd-9382-07dd727ff275",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "72cafac0-601d-413d-9dc5-228d3dddaec4",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCamera",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "925537e5-1f88-4c58-92b9-2cebd09f7ed4",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "198f7317-40e8-4258-b7b6-ab3136c77564",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
