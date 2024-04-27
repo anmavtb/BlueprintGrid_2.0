@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
-    [SerializeField] protected string displayName = "";
+    [SerializeField] protected string label = "";
     [SerializeField] protected float price = 0;
     [SerializeField] protected Sprite image = null;
 
@@ -13,7 +13,7 @@ public abstract class Item : MonoBehaviour
 
     public bool CanDeselect => canDeselect;
 
-    public string DisplayName => displayName;
+    public string Label => label;
     public float Price => price;
     public Sprite Image => image;
 

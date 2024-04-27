@@ -18,7 +18,7 @@ public class CatalogueUI : MonoBehaviour
             _button.GetComponentInChildren<ItemButton>().Item = _item;
 
             _imageField.sprite = _item.Image;
-            _textField.text = _item.DisplayName;
+            _textField.text = _item.Label;
         }
     }
 }

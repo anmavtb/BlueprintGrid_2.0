@@ -1,10 +1,32 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using TMPro;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
+
+[Serializable]
+class FinishList
+{
+    public string Label { get; set; }
+    public float Price { get; set; }
+    public float Count { get; set; }
+
+    // Constructor to initialize the values
+    public FinishList(string _label, float _price, float _count)
+    {
+        Label = _label;
+        Price = _price;
+        Count = _count;
+    }
+}
 
 public class PriceCalculator : Singleton<PriceCalculator>
 {
     [SerializeField, ReadOnly] float totalPrice = 0;
     [SerializeField, ReadOnly] TextMeshProUGUI priceText = null;
+    [SerializeField, ReadOnly] List<FinishList> finishList = new();
 
     public float TotalPrice => totalPrice;
 
@@ -39,6 +61,33 @@ public class PriceCalculator : Singleton<PriceCalculator>
 
     public void SendPrice()
     {
-        Debug.Log(totalPrice.ToString());
+        buildFinalList();
+        if (finishList.Count == 0) return;
+        float finalPrice = 0;
+        foreach (var _item in finishList)
+        {
+            Debug.Log($"{_item.Label} ({_item.Price} €) x {_item.Count} = {_item.Price * _item.Count} €");
+            finalPrice += _item.Price * _item.Count;
+        }
+        Debug.Log($"Total = {finalPrice} €");
+    }
+
+    void buildFinalList()
+    {
+        if (ItemPlacementManager.Instance.ItemsPlaced.Count == 0) return;
+        foreach (Structure _struct in ItemPlacementManager.Instance.ItemsPlaced)
+        {
+            bool _isNewItem = true;
+            foreach (var _item in finishList)
+            {
+                if (_item.Label == _struct.Label)
+                {
+                    _item.Count++;
+                    _isNewItem = false;
+                }
+            }
+            if (_isNewItem)
+                finishList.Add(new FinishList(_struct.Label, _struct.Price, 1));
+        }
     }
 }
