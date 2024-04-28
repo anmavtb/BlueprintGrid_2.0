@@ -75,19 +75,19 @@ public class PriceCalculator : Singleton<PriceCalculator>
     void buildFinalList()
     {
         if (ItemPlacementManager.Instance.ItemsPlaced.Count == 0) return;
-        foreach (Structure _struct in ItemPlacementManager.Instance.ItemsPlaced)
+        foreach (Item _item in ItemPlacementManager.Instance.ItemsPlaced)
         {
             bool _isNewItem = true;
-            foreach (var _item in finishList)
+            foreach (var _object in finishList)
             {
-                if (_item.Label == _struct.Label)
+                if (_object.Label == _item.Label)
                 {
-                    _item.Count++;
+                    _object.Count++;
                     _isNewItem = false;
                 }
             }
             if (_isNewItem)
-                finishList.Add(new FinishList(_struct.Label, _struct.Price, 1));
+                finishList.Add(new FinishList(_item.Label, _item.Price, 1));
         }
     }
 }

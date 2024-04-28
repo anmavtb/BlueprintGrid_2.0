@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class Accessory : Item
 {
     // Start is called before the first frame update

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5133415477467006618}
   - component: {fileID: 1183916942283087636}
   m_Layer: 7
-  m_Name: Wall
+  m_Name: Accessory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 1299814649955354893}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 0.04}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.05}
+  m_LocalScale: {x: 0.1, y: 0.15, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8670358504680615497}
@@ -114,9 +114,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8670358504680615497}
-  - component: {fileID: 862148466554224808}
+  - component: {fileID: 3086165545300362899}
   m_Layer: 7
-  m_Name: StructureObject
+  m_Name: AccessoryParent 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +138,7 @@ Transform:
   - {fileID: 5690180812111022545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &862148466554224808
+--- !u!114 &3086165545300362899
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,12 +147,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3929820224295500783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c98c9d5292455404b81f71a7b93fe2fc, type: 3}
+  m_Script: {fileID: 11500000, guid: a79b93b50cea5cd488d11898145afb85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: 
+  label: 
   price: 0
+  image: {fileID: 0}
   isSelected: 0
   canDeselect: 1
   rotateValue: 90
-  stats: {fileID: 0}
