@@ -524,7 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: Rideau
   price: 10
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: eb739c24d412b114d84ccb0cee4074e2, type: 3}
   isSelected: 0
   canDeselect: 1
   rotateValue: 90

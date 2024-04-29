@@ -717,7 +717,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemButton: {fileID: 3143684633762696497, guid: b24d1e97940c0474eb0d04eec3e5a8d7, type: 3}
-  category: {fileID: 7027796831804837076, guid: a26904b05e5e8564bba6e27102a19ee4, type: 3}
   parent: {fileID: 1134152495}
 --- !u!1001 &513904488
 PrefabInstance:

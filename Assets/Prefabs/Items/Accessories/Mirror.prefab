@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3086165545300362899, guid: 6260957d7440d5947ab89a894cadaf51, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 21300000, guid: 5f95109b077dff645afc2d6a012404af, type: 3}
+    - target: {fileID: 3086165545300362899, guid: 6260957d7440d5947ab89a894cadaf51, type: 3}
       propertyPath: label
       value: Miroir plein pied
       objectReference: {fileID: 0}
@@ -18,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3929820224295500783, guid: 6260957d7440d5947ab89a894cadaf51, type: 3}
       propertyPath: m_Name
-      value: Miror
+      value: Mirror
       objectReference: {fileID: 0}
     - target: {fileID: 5133415477467006618, guid: 6260957d7440d5947ab89a894cadaf51, type: 3}
       propertyPath: m_Materials.Array.data[0]

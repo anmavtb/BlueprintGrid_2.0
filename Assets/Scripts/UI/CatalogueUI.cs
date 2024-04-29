@@ -1,15 +1,12 @@
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class CatalogueUI : MonoBehaviour
 {
     [SerializeField] GameObject itemButton = null;
-    [SerializeField] GameObject category = null;
     [SerializeField] GameObject parent = null;
+    //[SerializeField] GameObject category = null;
     //[SerializeField, ReadOnly] GameObject subParent = null;
 
     // Start is called before the first frame update
