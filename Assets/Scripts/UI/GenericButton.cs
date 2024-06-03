@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public abstract class GenericButton : MonoBehaviour
 {
-    Button button = null;
+    protected Button button = null;
 
     // Start is called before the first frame update
     protected void Start()
