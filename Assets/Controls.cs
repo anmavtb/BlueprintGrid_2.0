@@ -53,6 +53,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""394b90c9-fa8a-4805-9ba6-e93fe79af321"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -86,6 +95,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RotateItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8cffd7c1-42b1-4683-b2d5-e10c82d75662"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2dd0ce24-1fa5-4807-9a11-6ee639464cb9"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelSelection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -149,6 +180,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Cursor_MousePosition = m_Cursor.FindAction("MousePosition", throwIfNotFound: true);
         m_Cursor_Select = m_Cursor.FindAction("Select", throwIfNotFound: true);
         m_Cursor_RotateItem = m_Cursor.FindAction("RotateItem", throwIfNotFound: true);
+        m_Cursor_CancelSelection = m_Cursor.FindAction("CancelSelection", throwIfNotFound: true);
         // GameCamera
         m_GameCamera = asset.FindActionMap("GameCamera", throwIfNotFound: true);
         m_GameCamera_RotateCamera = m_GameCamera.FindAction("RotateCamera", throwIfNotFound: true);
@@ -216,6 +248,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Cursor_MousePosition;
     private readonly InputAction m_Cursor_Select;
     private readonly InputAction m_Cursor_RotateItem;
+    private readonly InputAction m_Cursor_CancelSelection;
     public struct CursorActions
     {
         private @Controls m_Wrapper;
@@ -223,6 +256,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_Cursor_MousePosition;
         public InputAction @Select => m_Wrapper.m_Cursor_Select;
         public InputAction @RotateItem => m_Wrapper.m_Cursor_RotateItem;
+        public InputAction @CancelSelection => m_Wrapper.m_Cursor_CancelSelection;
         public InputActionMap Get() { return m_Wrapper.m_Cursor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -241,6 +275,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @RotateItem.started += instance.OnRotateItem;
             @RotateItem.performed += instance.OnRotateItem;
             @RotateItem.canceled += instance.OnRotateItem;
+            @CancelSelection.started += instance.OnCancelSelection;
+            @CancelSelection.performed += instance.OnCancelSelection;
+            @CancelSelection.canceled += instance.OnCancelSelection;
         }
 
         private void UnregisterCallbacks(ICursorActions instance)
@@ -254,6 +291,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @RotateItem.started -= instance.OnRotateItem;
             @RotateItem.performed -= instance.OnRotateItem;
             @RotateItem.canceled -= instance.OnRotateItem;
+            @CancelSelection.started -= instance.OnCancelSelection;
+            @CancelSelection.performed -= instance.OnCancelSelection;
+            @CancelSelection.canceled -= instance.OnCancelSelection;
         }
 
         public void RemoveCallbacks(ICursorActions instance)
@@ -322,6 +362,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnRotateItem(InputAction.CallbackContext context);
+        void OnCancelSelection(InputAction.CallbackContext context);
     }
     public interface IGameCameraActions
     {

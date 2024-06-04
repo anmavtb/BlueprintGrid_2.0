@@ -30,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1299814649955354893, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
       propertyPath: m_Name
-      value: WallObject
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3929820224295500783, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
       propertyPath: m_Name
-      value: Wall_0.5m
+      value: Wall_0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5690180812111022545, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
       propertyPath: m_LocalScale.x

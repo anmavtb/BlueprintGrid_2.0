@@ -9,11 +9,13 @@ public class InputManager : Singleton<InputManager>
     InputAction selectionInput = null;
     InputAction rotateItemInput = null;
     InputAction rotateCameraInput = null;
+    InputAction cancelSelection = null;
 
     public InputAction MousePositionInput => mousePositionInput;
     public InputAction SelectionInput => selectionInput;
     public InputAction RotateItemInput => rotateItemInput;
     public InputAction RotateCameraInput => rotateCameraInput;
+    public InputAction CancelSelection => cancelSelection;
 
     protected override void Awake()
     {
@@ -34,5 +36,8 @@ public class InputManager : Singleton<InputManager>
 
         rotateCameraInput = controls.GameCamera.RotateCamera;
         rotateCameraInput.Enable();
+
+        cancelSelection = controls.Cursor.CancelSelection;
+        cancelSelection.Enable();
     }
 }

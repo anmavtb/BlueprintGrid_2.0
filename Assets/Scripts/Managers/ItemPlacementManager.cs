@@ -7,6 +7,7 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
 {
     [SerializeField, ReadOnly] Vector3 itemLocation = Vector3.zero;
     [SerializeField, ReadOnly] Item currentItem = null;
+    [SerializeField, ReadOnly] Item previousItem = null;
     [SerializeField] SnapGrid grid = null;
     [SerializeField, ReadOnly] bool wrongSelectionCheck = false;
     [SerializeField, ReadOnly] float selectorCooldown = 0;
@@ -30,6 +31,8 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
         UpdateItemPosition();
         if (InputManager.Instance.SelectionInput.triggered)
             DropItem();
+        if (InputManager.Instance.CancelSelection.triggered)
+            DestroyCurrentItem();
         WrongSelectorCoolDown();
     }
 
@@ -44,6 +47,7 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
     {
         if (currentItem || wrongSelectionCheck) return;
         currentItem = _item;
+        previousItem = _item;
         currentItem.SelectItem();
         wrongSelectionCheck = true;
     }
@@ -66,6 +70,7 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
         if (!itemsPlaced.Contains(currentItem))
             itemsPlaced.Add(currentItem);
         currentItem = null;
+        CreateItem(previousItem);
     }
 
     public void WrongSelectorCoolDown()
@@ -111,7 +116,9 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
 
     void DestroyCurrentItem()
     {
+        if (!currentItem) return;
         Destroy(currentItem.gameObject);
         currentItem = null;
+        previousItem = null;
     }
 }
