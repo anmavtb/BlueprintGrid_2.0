@@ -19,7 +19,19 @@ public class Cursor : Singleton<Cursor>
     {
         Interact(editableSurfaceLayer, OnEditableSurface, detectionDistance);
         if (InputManager.Instance.SelectionInput.triggered)
-            InteractWithComponent(itemLayer, OnSelection, detectionDistance);
+        {
+            InteractWithComponent<Item>(itemLayer, _item =>
+            {
+                if (!_item)
+                {
+                    Debug.LogError("InteractWithComponent : Hit object does not have Item component.");
+                    return;
+                }
+                if (!ItemPlacementManager.Instance.ItemsPlaced.Contains(_item))
+                    OnSelection?.Invoke(_item);
+                ItemPlacementManager.Instance.PickUpItem(_item);
+            }, detectionDistance);
+        }
     }
 
     void Interact(LayerMask _validMask, Action<Vector3> _callback, float _distance = 20)
@@ -38,7 +50,13 @@ public class Cursor : Singleton<Cursor>
         Ray _ray = gameCamera.ScreenPointToRay(this.CursorLocation); // recup le rayon entre le curseur et la caméra
         bool _hit = Physics.Raycast(_ray, out RaycastHit _hitRay, _distance, _validMask); // fait le raycast pour detect le layer en param
         if (!_hit) return null;
-        T _get = _hitRay.transform.GetComponent<T>(); // si objet avec layer touché : essaye de récupérer le compo en rapport avec le param
+        T _get = _hitRay.transform.GetComponent<T>() ?? _hitRay.transform.GetComponentInParent<T>(); // si objet avec layer touché : essaye de récupérer le compo en rapport avec le param
+        if (!_get)
+        {
+            Debug.LogError("InteractWithComponent : _get is null for type " + typeof(T));
+            return null;
+        }
+        Debug.Log("InteractWithComponent : Component found - " + _get.name);
         _callback?.Invoke(_get); // trigger l'event en passant le compo en param
         return _get;
     }

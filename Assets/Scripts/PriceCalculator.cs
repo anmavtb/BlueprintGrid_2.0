@@ -36,7 +36,8 @@ public class PriceCalculator : Singleton<PriceCalculator>
     // Update is called once per frame
     void Update()
     {
-        if (ItemPlacementManager.Instance.ItemsPlaced.Count <= 0) return;
+        if (ItemPlacementManager.Instance.ItemsPlaced.Count == 0)
+            totalPrice = 0;
         CalculatePrice();
         UptadeTextBox(totalPrice);
     }

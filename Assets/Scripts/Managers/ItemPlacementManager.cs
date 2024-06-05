@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Progress;
 
 public class ItemPlacementManager : Singleton<ItemPlacementManager>
 {
@@ -46,6 +48,11 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
     void SetItem(Item _item)
     {
         if (currentItem || wrongSelectionCheck) return;
+        if (!_item)
+        {
+            Debug.LogError("SetItem : called with a null _item");
+            return;
+        }
         currentItem = _item;
         previousItem = _item;
         currentItem.SelectItem();
@@ -100,8 +107,15 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
     {
         if (itemsPlaced.Count <= 0) return;
         Item lastItem = itemsPlaced.Last();
-        itemsPlaced.Remove(lastItem);
+        RemoveItemFromList(lastItem);
         Destroy(lastItem.gameObject);
+    }
+
+    void RemoveItemFromList(Item _item)
+    {
+        if (!itemsPlaced.Contains(_item))
+            return;
+        itemsPlaced.Remove(_item);
     }
 
     public void ClearAll()
@@ -120,5 +134,17 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
         Destroy(currentItem.gameObject);
         currentItem = null;
         previousItem = null;
+    }
+
+    public bool IsItemPlaced(Item _item)
+    {
+        return itemsPlaced.Contains(_item);
+    }
+
+    public void PickUpItem(Item _item)
+    {
+        if (itemsPlaced.Count <= 0) return;
+        RemoveItemFromList(_item);
+        SetItem(_item);
     }
 }
