@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3929820224295500783, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
       propertyPath: m_Name
-      value: Wall_1m
+      value: Wall_1
       objectReference: {fileID: 0}
     - target: {fileID: 8670358504680615497, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -72,8 +72,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 862148466554224808, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3929820224295500783, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -454390358855253163}
   m_SourcePrefab: {fileID: 100100000, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
+--- !u!1 &8626512423315935320 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3929820224295500783, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
+  m_PrefabInstance: {fileID: 4701197209687485367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-454390358855253163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8626512423315935320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8addb7ba448012341a1e58e996695c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Mur 1m
+  price: 20
+  image: {fileID: 21300000, guid: 089e687ae905d9c4992a6edcdd10645e, type: 3}
+  isSelected: 0
+  canDeselect: 1
+  rotateValue: 90

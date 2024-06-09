@@ -88,8 +88,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 862148466554224808, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3929820224295500783, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8779012966016991280}
   m_SourcePrefab: {fileID: 100100000, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
+--- !u!1 &2070693480939323307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3929820224295500783, guid: 87202aeb384e24a41bfc695f4ca4d0fa, type: 3}
+  m_PrefabInstance: {fileID: 3041356999366116420}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8779012966016991280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070693480939323307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8addb7ba448012341a1e58e996695c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Mur 0.5m
+  price: 10
+  image: {fileID: 21300000, guid: 578ce3797ceee0d41988b48ae803d737, type: 3}
+  isSelected: 0
+  canDeselect: 1
+  rotateValue: 90

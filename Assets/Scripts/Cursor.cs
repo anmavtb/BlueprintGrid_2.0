@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Cursor : Singleton<Cursor>
@@ -29,7 +28,8 @@ public class Cursor : Singleton<Cursor>
                 }
                 if (!ItemPlacementManager.Instance.ItemsPlaced.Contains(_item))
                     OnSelection?.Invoke(_item);
-                ItemPlacementManager.Instance.PickUpItem(_item);
+                else
+                    ItemPlacementManager.Instance.PickUpItem(_item);
             }, detectionDistance);
         }
     }

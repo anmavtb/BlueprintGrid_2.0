@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Progress;
 
 public class ItemPlacementManager : Singleton<ItemPlacementManager>
 {
@@ -16,7 +14,6 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
     [SerializeField, ReadOnly] List<Item> itemsPlaced = new();
 
     public bool IsValid => grid;
-
     public List<Item> ItemsPlaced => itemsPlaced;
 
     // Start is called before the first frame update
@@ -31,10 +28,10 @@ public class ItemPlacementManager : Singleton<ItemPlacementManager>
     void Update()
     {
         UpdateItemPosition();
-        if (InputManager.Instance.SelectionInput.triggered)
-            DropItem();
-        if (InputManager.Instance.CancelSelection.triggered)
-            DestroyCurrentItem();
+            if (InputManager.Instance.SelectionInput.triggered)
+                DropItem();
+            if (InputManager.Instance.CancelSelection.triggered)
+                DestroyCurrentItem();
         WrongSelectorCoolDown();
     }
 

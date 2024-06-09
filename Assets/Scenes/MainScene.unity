@@ -1993,8 +1993,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catalogue:
-  - {fileID: 2433040449334756588, guid: 766a1281a0c336040b1c96756ce290dc, type: 3}
-  - {fileID: 5388827992940489503, guid: 3d773245eff4eda4095eb8eb8e784652, type: 3}
+  - {fileID: 8779012966016991280, guid: 766a1281a0c336040b1c96756ce290dc, type: 3}
+  - {fileID: -454390358855253163, guid: 3d773245eff4eda4095eb8eb8e784652, type: 3}
   - {fileID: 5191510933828044368, guid: 2e55bf5d41a45f642a7ac7ce6a05902b, type: 3}
   - {fileID: 233690950908288717, guid: 9af8436d94908384a83fdd41eeb490d8, type: 3}
   - {fileID: 1104522025572020618, guid: d9b21026032bd4945b6da6043ad33b52, type: 3}
@@ -2019,6 +2019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemLocation: {x: 0, y: 0, z: 0}
   currentItem: {fileID: 0}
+  previousItem: {fileID: 0}
   grid: {fileID: 1454858699}
   wrongSelectionCheck: 0
   selectorCooldown: 0
@@ -2050,7 +2051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd057f2625e1e347a4a91b1bda299ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugItemPlacement: 0
+  debugItemPlacement: 1
 --- !u!114 &1110134251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2401,7 +2402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f20402e1a03cba4a948b4353dfaae73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surface: {fileID: 1454858701}
+  filter: {fileID: 1454858702}
+  gridSize: {x: 20, y: 20}
   spaceValue: 0.5
 --- !u!64 &1454858700
 MeshCollider:
